@@ -1,12 +1,18 @@
 from flask import Flask, jsonify
+from datetime import datetime
 
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    # Hemos actualizado el mensaje para validar el despliegue automático
-    return jsonify({"message": "¡Actualización exitosa V2! El Pipeline de Jenkins funciona perfecto."})
+    # V1: Formato técnico para monitoreo
+    return jsonify({
+        "status": "online",
+        "message": "¡Servidor Flask en Docker funcionando!",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "version": "1.0.0",
+        "developer": "Roy"
+    })
 
 if __name__ == "__main__":
-    # Escucha en el puerto 5000 para que coincida con tu configuración de Docker y AWS [cite: 14, 21]
     app.run(host="0.0.0.0", port=5000)
